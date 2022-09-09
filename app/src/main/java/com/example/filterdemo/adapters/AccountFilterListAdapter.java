@@ -20,8 +20,7 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
 
     Context context;
     List<Hierarchy> mAccountList;
-    ArrayList<String> ret;
-    boolean isMutliChoice = true;
+    List<String> ret;
 
     public AccountFilterListAdapter(Context context) {
         this.context = context;
@@ -53,7 +52,7 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
         this.mAccountList = mAccountList;
     }
 
-    public ArrayList<String> getSelectedList() {
+    public List<String> getSelectedList() {
         return ret;
     }
 
@@ -70,13 +69,6 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
             binding.cbFilterItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    if (!isMutliChoice) {
-                        handleSingleChip(model);
-                        if(itemSelected != null)
-                            itemSelected.onSingleItemSelected(model.getAccountNumber(),model);
-
-                    } else {
                         if (model.isAccountSelected()) {
                             model.setAccountSelected(false);
                         } else {
@@ -84,7 +76,6 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
                         }
                         returnMutipleId(model);
                         notifyDataSetChanged();
-                    }
                 }
             });
 
@@ -93,7 +84,7 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
         }
 
         private void returnMutipleId(Hierarchy model) {
-            ArrayList<String> ret = new ArrayList<>();
+            ret = new ArrayList<>();
 
             for (int i = 0; i < mAccountList.size(); i++) {
                 Hierarchy chipModel = mAccountList.get(i);

@@ -21,8 +21,7 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
 
     Context context;
     List<LocationName> mLocationsList;
-    boolean isMutliChoice = true;
-    ArrayList<String> ret;
+    List<String> ret;
 
     public LocationFilterListAdapter(Context context) {
         this.context = context;
@@ -54,7 +53,7 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
         this.mLocationsList = mLocationsList;
     }
 
-    public ArrayList<String> getSelectedList() {
+    public List<String> getSelectedList() {
     return ret;
     }
 
@@ -72,12 +71,6 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
                 @Override
                 public void onClick(View view) {
 
-                    if (!isMutliChoice) {
-                        handleSingleChip(model);
-                        if(itemSelected != null)
-                            itemSelected.onSingleItemSelected(model.getLocationName(),model);
-
-                    } else {
                         if (model.isLocationsSelected()) {
                             model.setLocationsSelected(false);
                         } else {
@@ -85,7 +78,6 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
                         }
                         returnMutipleId(model);
                         notifyDataSetChanged();
-                    }
                 }
             });
 

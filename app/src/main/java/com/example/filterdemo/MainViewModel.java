@@ -3,6 +3,7 @@ package com.example.filterdemo;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.filterdemo.models.BrandName;
@@ -36,9 +37,18 @@ public class MainViewModel extends ViewModel {
     public List<BrandName> mBrandName = new ArrayList<>();
     public List<LocationName> mLocationList = new ArrayList<>();
 
-    ArrayList<String> selectedAccounts = new ArrayList<>();
-    ArrayList<String> selectedBrands = new ArrayList<>();
-    ArrayList<String> selectedLocation = new ArrayList<>();
+    private List<String> selectedAccounts = new ArrayList<>();
+    private List<String> selectedBrands = new ArrayList<>();
+    private List<String> selectedLocation = new ArrayList<>();
+
+    private MutableLiveData<List<String>> _selectedAccountsLiveData = new MutableLiveData<>();
+    private LiveData<List<String>> selectedAccountsLiveData = _selectedAccountsLiveData;
+
+    private MutableLiveData<List<String>> _selectedBrandsLiveData = new MutableLiveData<>();
+    private LiveData<List<String>> selectedBrandsLiveData = _selectedBrandsLiveData;
+
+    private MutableLiveData<List<String>> _selectedLocationLiveData = new MutableLiveData<>();
+    private LiveData<List<String>> selectedLocationLiveData = _selectedLocationLiveData;
 
 
     private static MainViewModel mInstance;
@@ -102,20 +112,32 @@ public class MainViewModel extends ViewModel {
         return mLocationList;
     }
 
-    public void setSelectedAccounts(ArrayList<String> ids) {
+    public void setSelectedAccounts(List<String> ids) {
         selectedAccounts.clear();
         if(ids != null)
             this.selectedAccounts.addAll(ids);
     }
 
-    public void setSelectedBrands(ArrayList<String> ids) {
+    public void setSelectedBrands(List<String> ids) {
         selectedBrands.clear();
         if(ids != null)
             this.selectedBrands.addAll(ids);
     }
-    public void setSelectedLocations(ArrayList<String> ids) {
+    public void setSelectedLocations(List<String> ids) {
         selectedLocation.clear();
         if(ids != null)
             this.selectedLocation.addAll(ids);
+    }
+
+    public LiveData<List<String>> getSelectedAccountsLiveData() {
+        return selectedAccountsLiveData;
+    }
+
+    public LiveData<List<String>> getSelectedBrandsLiveData() {
+        return selectedBrandsLiveData;
+    }
+
+    public LiveData<List<String>> getSelectedLocationLiveData() {
+        return selectedLocationLiveData;
     }
 }

@@ -113,7 +113,7 @@ public class FilterList_BT extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 getSelectedList();
-                dismiss();
+//                dismiss();
             }
         });
     }
@@ -131,6 +131,7 @@ public class FilterList_BT extends BottomSheetDialogFragment {
             {
                 mainViewModel.setSelectedLocations(locationFilterListAdapter.getSelectedList());
             }
+            dismiss();
     }
 
     private boolean isStringValid(String text){

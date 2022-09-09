@@ -20,8 +20,7 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
 
     Context context;
     List<BrandName> mBrandsList;
-    boolean isMutliChoice = true;
-    ArrayList<String> ret;
+    List<String> ret;
 
     public BrandFilterListAdapter(Context context) {
         this.context = context;
@@ -53,7 +52,7 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
         this.mBrandsList = mBrandsList;
     }
 
-    public ArrayList<String> getSelectedList() {
+    public List<String> getSelectedList() {
         return ret;
     }
 
@@ -71,12 +70,6 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
                 @Override
                 public void onClick(View view) {
 
-                    if (!isMutliChoice) {
-                        handleSingleChip(model);
-                        if(itemSelected != null)
-                            itemSelected.onSingleItemSelected(model.getBrandName(),model);
-
-                    } else {
                         if (model.isBrandSelected()) {
                             model.setBrandSelected(false);
                         } else {
@@ -84,7 +77,6 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
                         }
                         returnMutipleId(model);
                         notifyDataSetChanged();
-                    }
                 }
             });
 
