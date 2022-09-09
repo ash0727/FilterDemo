@@ -66,12 +66,14 @@
                 />
 
             <EditText
+                android:id="@+id/edtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="Seach for Brand"
                 android:textColor="@color/lightTextColor"
                 android:layout_gravity="center"
+                android:fontFamily="@font/cera_round_pro_medium"
                 />
 
         </LinearLayout>
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content">
 
                 <CheckBox
+                    android:id="@+id/cbSelectAllFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Select All"
@@ -103,6 +106,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvClearFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

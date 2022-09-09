@@ -62,6 +62,7 @@ public class MainViewModel extends ViewModel {
         this.context = context;
         this.filterRepository = filterRepository;
         filterList =  filterRepository.loadFilterFromAsset();
+        getAccountList();
         return this;
     }
 
@@ -116,17 +117,20 @@ public class MainViewModel extends ViewModel {
         selectedAccounts.clear();
         if(ids != null)
             this.selectedAccounts.addAll(ids);
+        _selectedAccountsLiveData.postValue(selectedAccounts);
     }
 
     public void setSelectedBrands(List<String> ids) {
         selectedBrands.clear();
         if(ids != null)
             this.selectedBrands.addAll(ids);
+        _selectedBrandsLiveData.postValue(selectedBrands);
     }
     public void setSelectedLocations(List<String> ids) {
         selectedLocation.clear();
         if(ids != null)
             this.selectedLocation.addAll(ids);
+        _selectedLocationLiveData.postValue(selectedLocation);
     }
 
     public LiveData<List<String>> getSelectedAccountsLiveData() {
@@ -140,4 +144,41 @@ public class MainViewModel extends ViewModel {
     public LiveData<List<String>> getSelectedLocationLiveData() {
         return selectedLocationLiveData;
     }
+
+    public void clearAllSelection(){
+        clearAccountSelectionAll();
+        clearBrandsSelectionAll();
+        clearLocationSelectionAll();
+    }
+
+    public void clearAccountSelectionAll(){
+        for (int i = 0; i < mAccountList.size(); i++) {
+            Hierarchy chipModel = mAccountList.get(i);
+            chipModel.setAccountSelected(false);
+        }
+        selectedAccounts.clear();
+        _selectedAccountsLiveData.postValue(selectedAccounts);
+    }
+
+
+    public void clearBrandsSelectionAll(){
+        for (int i = 0; i < mBrandName.size(); i++) {
+            BrandName chipModel = mBrandName.get(i);
+            chipModel.setBrandSelected(false);
+        }
+        selectedBrands.clear();
+        _selectedBrandsLiveData.postValue(selectedBrands);
+    }
+
+    public void clearLocationSelectionAll(){
+        for (int i = 0; i < mLocationList.size(); i++) {
+            LocationName chipModel = mLocationList.get(i);
+            chipModel.setLocationsSelected(false);
+        }
+        selectedLocation.clear();
+        _selectedLocationLiveData.postValue(selectedLocation);
+    }
+
+
+
 }

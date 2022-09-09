@@ -8,13 +8,15 @@
 
     <LinearLayout
         android:id="@+id/lnrContainer"
-        android:layout_above="@+id/btnApply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnApply"
         android:background="@drawable/d_corner_white_top_left_right"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        android:paddingBottom="30dp">
+        android:paddingBottom="30dp"
+        android:animateLayoutChanges="true"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,6 +61,7 @@
             android:textSize="12sp" />
 
         <RelativeLayout
+                android:id="@+id/lnrSelectedFilterParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -66,22 +69,21 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recSelectedFilter"
+            <LinearLayout
+                android:id="@+id/lnrSelectedFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_selected_filter" />
+                android:orientation="horizontal" />
 
             <TextView
+                android:id="@+id/tvClearAllSelection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:text="Clear"
-                android:textColor="#8F97A2"
                 android:background="@drawable/d_bottom_unselected"
-                />
+                android:text="Clear"
+                android:textColor="#8F97A2" />
         </RelativeLayout>
 
         <LinearLayout
@@ -93,8 +95,9 @@
                 android:text="Select Account Number" />
 
             <TextView
+                android:id="@+id/tvSelectedAccountCount"
                 style="@style/FilterSelectionCountText"
-                android:text="1" />
+                android:text="" />
 
             <ImageView
                 android:layout_width="@dimen/arrow_icon_size"
@@ -116,9 +119,9 @@
                 android:text="Select Brand" />
 
             <TextView
+                android:id="@+id/tvSelectedBrandCount"
                 style="@style/FilterSelectionCountText"
-
-                android:text="1" />
+                android:text="" />
 
             <ImageView
                 android:layout_width="@dimen/arrow_icon_size"
@@ -140,8 +143,9 @@
                 android:text="Select Locations" />
 
             <TextView
+                android:id="@+id/tvSelectedLocationCount"
                 style="@style/FilterSelectionCountText"
-                android:text="1" />
+                android:text="" />
 
             <ImageView
                 android:layout_width="@dimen/arrow_icon_size"

@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.filterdemo.MainViewModel;
 import com.example.filterdemo.databinding.ItemFilterListBinding;
 import com.example.filterdemo.interfaces.OnItemSelected;
+import com.example.filterdemo.models.BrandName;
 import com.example.filterdemo.models.LocationName;
 import com.example.filterdemo.models.LocationName;
 
@@ -21,10 +23,11 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
 
     Context context;
     List<LocationName> mLocationsList;
-    List<String> ret;
+    MainViewModel mainViewModel;
 
-    public LocationFilterListAdapter(Context context) {
+    public LocationFilterListAdapter(Context context, MainViewModel mainViewModel) {
         this.context = context;
+        this.mainViewModel = mainViewModel;
     }
     OnItemSelected itemSelected;
     public void onItemSelected(OnItemSelected itemSelected){
@@ -53,8 +56,31 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
         this.mLocationsList = mLocationsList;
     }
 
-    public List<String> getSelectedList() {
-    return ret;
+    public void returnMutipleId() {
+        List<String> ret = new ArrayList<>();
+
+        for (int i = 0; i < mLocationsList.size(); i++) {
+            LocationName chipModel = mLocationsList.get(i);
+
+            if (chipModel.isLocationsSelected()) {
+                ret.add(chipModel.getLocationName());
+            }
+        }
+        if(itemSelected != null)
+            itemSelected.onMultipleItemSelected(ret,null);
+    }
+
+    public void selectAll(){
+        for (int i = 0; i < mLocationsList.size(); i++) {
+            LocationName chipModel = mLocationsList.get(i);
+            chipModel.setLocationsSelected(true);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clearAll(){
+        mainViewModel.clearLocationSelectionAll();
+        notifyDataSetChanged();
     }
 
     class myHolder extends RecyclerView.ViewHolder{
@@ -76,43 +102,12 @@ public class LocationFilterListAdapter extends RecyclerView.Adapter<LocationFilt
                         } else {
                             model.setLocationsSelected(true);
                         }
-                        returnMutipleId(model);
+//                        returnMutipleId(model);
                         notifyDataSetChanged();
                 }
             });
 
-            if(model.isLocationsSelected())
-                binding.cbFilterItem.setChecked(model.isLocationsSelected());
-        }
-
-        private void returnMutipleId(LocationName model) {
-            ret = new ArrayList<>();
-
-            for (int i = 0; i < mLocationsList.size(); i++) {
-                LocationName chipModel = mLocationsList.get(i);
-
-                if (chipModel.isLocationsSelected()) {
-                    ret.add(chipModel.getLocationName());
-                }
-            }
-            if(itemSelected != null)
-                itemSelected.onMultipleItemSelected(ret,model);
-        }
-
-
-        private void handleSingleChip(LocationName selectedChip) {
-            for (int i = 0; i < mLocationsList.size(); i++) {
-                LocationName chipModel = mLocationsList.get(i);
-
-                if (chipModel == selectedChip) {
-                    selectedChip.setLocationsSelected(!selectedChip.isLocationsSelected());
-                } else {
-                    chipModel.setLocationsSelected(false);
-                }
-
-            }
-
-            notifyDataSetChanged();
+            binding.cbFilterItem.setChecked(model.isLocationsSelected());
         }
     }
 }

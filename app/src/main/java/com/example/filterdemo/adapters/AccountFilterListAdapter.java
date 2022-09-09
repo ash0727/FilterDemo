@@ -9,8 +9,10 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.filterdemo.MainViewModel;
 import com.example.filterdemo.databinding.ItemFilterListBinding;
 import com.example.filterdemo.interfaces.OnItemSelected;
+import com.example.filterdemo.models.BrandName;
 import com.example.filterdemo.models.Hierarchy;
 
 import java.util.ArrayList;
@@ -20,10 +22,11 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
 
     Context context;
     List<Hierarchy> mAccountList;
-    List<String> ret;
+    MainViewModel mainViewModel;
 
-    public AccountFilterListAdapter(Context context) {
+    public AccountFilterListAdapter(Context context,MainViewModel mainViewModel) {
         this.context = context;
+        this.mainViewModel = mainViewModel;
     }
     OnItemSelected itemSelected;
     public void onItemSelected(OnItemSelected itemSelected){
@@ -52,10 +55,6 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
         this.mAccountList = mAccountList;
     }
 
-    public List<String> getSelectedList() {
-        return ret;
-    }
-
     class myHolder extends RecyclerView.ViewHolder{
         ItemFilterListBinding binding;
         public myHolder(@NonNull ItemFilterListBinding itemView) {
@@ -74,43 +73,42 @@ public class AccountFilterListAdapter extends RecyclerView.Adapter<AccountFilter
                         } else {
                             model.setAccountSelected(true);
                         }
-                        returnMutipleId(model);
+//                        returnMutipleId(model);
                         notifyDataSetChanged();
                 }
             });
 
-            if(model.isAccountSelected())
-                binding.cbFilterItem.setChecked(model.isAccountSelected());
+
+            binding.cbFilterItem.setChecked(model.isAccountSelected());
         }
 
-        private void returnMutipleId(Hierarchy model) {
-            ret = new ArrayList<>();
-
-            for (int i = 0; i < mAccountList.size(); i++) {
-                Hierarchy chipModel = mAccountList.get(i);
-
-                if (chipModel.isAccountSelected()) {
-                    ret.add(chipModel.getAccountNumber());
-                }
-            }
-            if(itemSelected != null)
-                itemSelected.onMultipleItemSelected(ret,model);
-        }
-
-
-        private void handleSingleChip(Hierarchy selectedChip) {
-            for (int i = 0; i < mAccountList.size(); i++) {
-                Hierarchy chipModel = mAccountList.get(i);
-
-                if (chipModel == selectedChip) {
-                    selectedChip.setAccountSelected(!selectedChip.isAccountSelected());
-                } else {
-                    chipModel.setAccountSelected(false);
-                }
-
-            }
-
-            notifyDataSetChanged();
-        }
     }
+
+    public void returnMutipleId() {
+        ArrayList ret = new ArrayList<>();
+
+        for (int i = 0; i < mAccountList.size(); i++) {
+            Hierarchy chipModel = mAccountList.get(i);
+
+            if (chipModel.isAccountSelected()) {
+                ret.add(chipModel.getAccountNumber());
+            }
+        }
+        if(itemSelected != null)
+            itemSelected.onMultipleItemSelected(ret,null);
+    }
+
+    public void selectAll(){
+        for (int i = 0; i < mAccountList.size(); i++) {
+            Hierarchy chipModel = mAccountList.get(i);
+            chipModel.setAccountSelected(true);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clearAll(){
+        mainViewModel.clearAccountSelectionAll();
+        notifyDataSetChanged();
+    }
+
 }

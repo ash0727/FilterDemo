@@ -13,10 +13,10 @@
         <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/drawable/d_corner_white_top_left_right.xml" value="0.15462962962962962" />
         <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/fragment_applyfilter.xml" value="0.13333333333333333" />
-        <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/fragment_filterlist.xml" value="0.13333333333333333" />
+        <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/fragment_filterlist.xml" value="0.1" />
         <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/item_filter_headinglist.xml" value="0.1" />
         <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/item_filter_list.xml" value="0.16354166666666667" />
-        <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/item_selected_filter.xml" value="0.13333333333333333" />
+        <entry key="..\:/AsifFilese/Personal/Test/FilterDemo/app/src/main/res/layout/item_selected_filter.xml" value="0.5" />
       </map>
     </option>
   </component>

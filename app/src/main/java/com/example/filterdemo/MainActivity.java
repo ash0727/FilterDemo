@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openApplyFilterFragment(){
-        ApplyFilter_BT applyFilter_bt = new ApplyFilter_BT();
+        ApplyFilter_BT applyFilter_bt = new ApplyFilter_BT(mainViewModel);
         applyFilter_bt.setFilterData(mainViewModel.getFilterListLiveData());
         applyFilter_bt.show(getSupportFragmentManager(),applyFilter_bt.getTag());
         applyFilter_bt.returnResponse(new returnCallBack() {

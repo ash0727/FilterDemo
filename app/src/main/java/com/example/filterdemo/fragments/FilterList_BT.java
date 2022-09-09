@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -95,7 +96,11 @@ public class FilterList_BT extends BottomSheetDialogFragment {
         String heading = FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER) ? "Select Accounts"
                 : FILTER_TYPE.equalsIgnoreCase(Variables.BRAND) ? "Select Brands" : "Select Locations";
 
+        String search_hint = FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER) ? "Search for Accounts"
+                : FILTER_TYPE.equalsIgnoreCase(Variables.BRAND) ? "Search for Brand" : "Search for Locations";
+
         binding.tvTitle.setText(""+heading);
+        binding.edtSearch.setHint(search_hint);
         manageOnClicks();
 
         initAdapter();
@@ -116,20 +121,46 @@ public class FilterList_BT extends BottomSheetDialogFragment {
 //                dismiss();
             }
         });
+
+        binding.tvClearFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.cbSelectAllFilter.setChecked(false);
+                clearAllFilters();
+            }
+        });
+
+        binding.cbSelectAllFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if(b)
+                {
+                    selectAllFilters();
+                }
+                else {
+                    clearAllFilters();
+                }
+
+            }
+        });
     }
 
     private void getSelectedList() {
             if(FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER))
             {
-                mainViewModel.setSelectedAccounts(filterHeadingAdapter.getSelectedList());
+                filterHeadingAdapter.returnMutipleId();
+                mainViewModel.setSelectedAccounts(SelectedFilters);
             }
             else if(FILTER_TYPE.equalsIgnoreCase(Variables.BRAND))
             {
-                mainViewModel.setSelectedBrands(brandFilterListAdapter.getSelectedList());
+                brandFilterListAdapter.returnMutipleId();
+                mainViewModel.setSelectedBrands(SelectedFilters);
             }
             else if(FILTER_TYPE.equalsIgnoreCase(Variables.LOCATIONS))
             {
-                mainViewModel.setSelectedLocations(locationFilterListAdapter.getSelectedList());
+                locationFilterListAdapter.returnMutipleId();
+                mainViewModel.setSelectedLocations(SelectedFilters);
             }
             dismiss();
     }
@@ -140,25 +171,69 @@ public class FilterList_BT extends BottomSheetDialogFragment {
 
     private void initAdapter() {
 
-         filterHeadingAdapter = new AccountFilterListAdapter(context);
-         brandFilterListAdapter = new BrandFilterListAdapter(context);
-         locationFilterListAdapter = new LocationFilterListAdapter(context);
-
         binding.recFilterList.setLayoutManager(new LinearLayoutManager(context));
         if(FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER))
         {
+            filterHeadingAdapter = new AccountFilterListAdapter(context,mainViewModel);
+            filterHeadingAdapter.onItemSelected(itemSelected);
             filterHeadingAdapter.setAccountlist(accountList);
             binding.recFilterList.setAdapter(filterHeadingAdapter);
         }
         else if(FILTER_TYPE.equalsIgnoreCase(Variables.BRAND))
         {
+            brandFilterListAdapter = new BrandFilterListAdapter(context,mainViewModel);
+            brandFilterListAdapter.onItemSelected(itemSelected);
             brandFilterListAdapter.setAccountlist(brandsList);
             binding.recFilterList.setAdapter(brandFilterListAdapter);
         }
         else if(FILTER_TYPE.equalsIgnoreCase(Variables.LOCATIONS))
         {
+            locationFilterListAdapter = new LocationFilterListAdapter(context,mainViewModel);
+            locationFilterListAdapter.onItemSelected(itemSelected);
             locationFilterListAdapter.setAccountlist(locationList);
             binding.recFilterList.setAdapter(locationFilterListAdapter);
+        }
+    }
+
+    List<String> SelectedFilters ;
+    OnItemSelected itemSelected = new OnItemSelected() {
+        @Override
+        public void onSingleItemSelected(String id, Object object) {
+        }
+
+        @Override
+        public void onMultipleItemSelected(List<String> ids, Object object) {
+            SelectedFilters = ids;
+        }
+    };
+
+    private void selectAllFilters(){
+        if(FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER))
+        {
+            filterHeadingAdapter.selectAll();
+        }
+        else if(FILTER_TYPE.equalsIgnoreCase(Variables.BRAND))
+        {
+            brandFilterListAdapter.selectAll();
+        }
+        else if(FILTER_TYPE.equalsIgnoreCase(Variables.LOCATIONS))
+        {
+            locationFilterListAdapter.selectAll();
+        }
+    }
+
+    private void clearAllFilters(){
+        if(FILTER_TYPE.equalsIgnoreCase(Variables.ACCOUNT_NUMBER))
+        {
+            filterHeadingAdapter.clearAll();
+        }
+        else if(FILTER_TYPE.equalsIgnoreCase(Variables.BRAND))
+        {
+            brandFilterListAdapter.clearAll();
+        }
+        else if(FILTER_TYPE.equalsIgnoreCase(Variables.LOCATIONS))
+        {
+            locationFilterListAdapter.clearAll();
         }
     }
 

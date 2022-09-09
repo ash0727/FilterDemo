@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.filterdemo.MainViewModel;
 import com.example.filterdemo.databinding.ItemFilterListBinding;
 import com.example.filterdemo.interfaces.OnItemSelected;
 import com.example.filterdemo.models.BrandName;
@@ -20,10 +21,10 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
 
     Context context;
     List<BrandName> mBrandsList;
-    List<String> ret;
-
-    public BrandFilterListAdapter(Context context) {
+    MainViewModel mainViewModel;
+    public BrandFilterListAdapter(Context context, MainViewModel mainViewModel) {
         this.context = context;
+        this.mainViewModel = mainViewModel;
     }
     OnItemSelected itemSelected;
     public void onItemSelected(OnItemSelected itemSelected){
@@ -52,8 +53,31 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
         this.mBrandsList = mBrandsList;
     }
 
-    public List<String> getSelectedList() {
-        return ret;
+    public void returnMutipleId() {
+        List<String>  ret = new ArrayList<>();
+
+        for (int i = 0; i < mBrandsList.size(); i++) {
+            BrandName chipModel = mBrandsList.get(i);
+
+            if (chipModel.isBrandSelected()) {
+                ret.add(chipModel.getBrandName());
+            }
+        }
+        if(itemSelected != null)
+            itemSelected.onMultipleItemSelected(ret,null);
+    }
+
+    public void selectAll(){
+        for (int i = 0; i < mBrandsList.size(); i++) {
+            BrandName chipModel = mBrandsList.get(i);
+            chipModel.setBrandSelected(true);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clearAll(){
+        mainViewModel.clearBrandsSelectionAll();
+        notifyDataSetChanged();
     }
 
     class myHolder extends RecyclerView.ViewHolder{
@@ -75,17 +99,16 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
                         } else {
                             model.setBrandSelected(true);
                         }
-                        returnMutipleId(model);
+//                        returnMutipleId(model);
                         notifyDataSetChanged();
                 }
             });
 
-            if(model.isBrandSelected())
-                binding.cbFilterItem.setChecked(model.isBrandSelected());
+            binding.cbFilterItem.setChecked(model.isBrandSelected());
         }
 
         private void returnMutipleId(BrandName model) {
-             ret = new ArrayList<>();
+            List<String>  ret = new ArrayList<>();
 
             for (int i = 0; i < mBrandsList.size(); i++) {
                 BrandName chipModel = mBrandsList.get(i);
@@ -96,22 +119,6 @@ public class BrandFilterListAdapter extends RecyclerView.Adapter<BrandFilterList
             }
             if(itemSelected != null)
                 itemSelected.onMultipleItemSelected(ret,model);
-        }
-
-
-        private void handleSingleChip(BrandName selectedChip) {
-            for (int i = 0; i < mBrandsList.size(); i++) {
-                BrandName chipModel = mBrandsList.get(i);
-
-                if (chipModel == selectedChip) {
-                    selectedChip.setBrandSelected(!selectedChip.isBrandSelected());
-                } else {
-                    chipModel.setBrandSelected(false);
-                }
-
-            }
-
-            notifyDataSetChanged();
         }
     }
 }
