@@ -15,7 +15,7 @@
 
         <item name="android:textViewStyle">@style/fontStype</item>
         <item name="android:buttonStyle">@style/fontStype</item>
-        <item name="android:checkedButton">@style/fontStype</item>
+        <item name="android:checkboxStyle">@style/fontStype</item>
         <item name="android:editTextStyle">@style/fontStype</item>
 
     </style>

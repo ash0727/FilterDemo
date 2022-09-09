@@ -20,6 +20,7 @@
             android:fontFamily="@font/cera_round_pro_bold"
             android:textSize="18sp"
             android:textAllCaps="true"
+            android:buttonTint="@color/checkboxColor"
             />
 
     </LinearLayout>

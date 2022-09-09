@@ -95,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="Select All"
                     android:textColor="@color/lightTextColor"
+                    android:buttonTint="@color/checkboxColor"
                     />
 
                 <View
@@ -139,7 +140,7 @@
         android:layout_marginTop="-15dp"
         android:background="@drawable/d_corner_blue_top_left_right"
         android:gravity="center"
-        android:text="APPLY"
+        android:text="ADD TO FILTER"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="15sp" />
