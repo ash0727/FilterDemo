@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvSelectedFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Acc No.:  1"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="6dp"
+        android:background="@drawable/d_corner_blue"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:layout_marginRight="5dp"
+        />
+</RelativeLayout>

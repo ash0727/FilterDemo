@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="20dp"
+        >
+        <CheckBox
+            android:id="@+id/cbFilterItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select All"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cera_round_pro_bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?dividerHorizontal"
+        />
+</LinearLayout>

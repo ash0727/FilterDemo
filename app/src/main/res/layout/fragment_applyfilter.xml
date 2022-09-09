@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    >
+
+    <LinearLayout
+        android:id="@+id/lnrContainer"
+        android:layout_above="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/d_corner_white_top_left_right"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Apply Filter"
+                android:textColor="#8F97A2" />
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_close" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="?dividerHorizontal" />
+
+        <TextView
+            android:id="@+id/tvCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/d_corner_blue"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:text="Pharama Zone..."
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="#DEE5EB"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recSelectedFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_selected_filter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="Clear"
+                android:textColor="#8F97A2"
+                android:background="@drawable/d_bottom_unselected"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lnrSelecAccountNumber"
+            style="@style/FilterSelectionParent">
+
+            <TextView
+                style="@style/FilterSelectionHeadingText"
+                android:text="Select Account Number" />
+
+            <TextView
+                style="@style/FilterSelectionCountText"
+                android:text="1" />
+
+            <ImageView
+                android:layout_width="@dimen/arrow_icon_size"
+                android:layout_height="@dimen/arrow_icon_size"
+                android:src="@drawable/ic_arrow_forward" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?dividerHorizontal" />
+
+        <LinearLayout
+            android:id="@+id/lnrSelectBrand"
+            style="@style/FilterSelectionParent">
+
+            <TextView
+                style="@style/FilterSelectionHeadingText"
+                android:text="Select Brand" />
+
+            <TextView
+                style="@style/FilterSelectionCountText"
+
+                android:text="1" />
+
+            <ImageView
+                android:layout_width="@dimen/arrow_icon_size"
+                android:layout_height="@dimen/arrow_icon_size"
+                android:src="@drawable/ic_arrow_forward" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?dividerHorizontal" />
+
+        <LinearLayout
+            android:id="@+id/lnrSelecLocation"
+            style="@style/FilterSelectionParent">
+
+            <TextView
+                style="@style/FilterSelectionHeadingText"
+                android:text="Select Locations" />
+
+            <TextView
+                style="@style/FilterSelectionCountText"
+                android:text="1" />
+
+            <ImageView
+                android:layout_width="@dimen/arrow_icon_size"
+                android:layout_height="@dimen/arrow_icon_size"
+                android:src="@drawable/ic_arrow_forward" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?dividerHorizontal" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="-15dp"
+        android:background="@drawable/d_corner_blue_top_left_right"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="15sp"
+        android:text="APPLY" />
+
+</RelativeLayout>
